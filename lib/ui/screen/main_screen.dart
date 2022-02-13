@@ -113,9 +113,21 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 itemCount: MineSweeperGame.cells,
                 itemBuilder: (BuildContext ctx, index) {
-                  return Container(
-                    decoration: BoxDecoration(color: Colors.white),
-                    child: Center(child: Text(game.gameMap[index].content)),
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        game.getClickedCell(game.gameMap[index]);
+                        print(game.gameMap[index].content);
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Center(
+                        child: Text(game.gameMap[index].reveal
+                            ? game.gameMap[index].content
+                            : ""),
+                      ),
+                    ),
                   );
                 }),
           ),

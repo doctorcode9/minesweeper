@@ -35,14 +35,14 @@ class MineSweeperGame {
   static void showMines() {
     for (int i = 0; i < row; i++) {
       for (int j = 0; j < col; j++) {
-        map[i][j].content == "X";
+        map[i][j].reveal = map[i][j].content == "X";
       } // revealing all the mines
 
     }
   }
 
   // function to calculate adjacent mine on click
-  static void getClickedCell(Cell cell) {
+  void getClickedCell(Cell cell) {
     //checking if we have clicked on a mine
     if (cell.content == "X") {
       showMines();
