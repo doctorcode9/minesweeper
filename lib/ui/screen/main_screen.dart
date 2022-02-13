@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/ui/theme/colors.dart';
+import 'package:minesweeper/utils/game_helper.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -9,6 +10,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  MineSweeperGame game = MineSweeperGame();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    game.generateMap();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +100,31 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
             ],
-          )
+          ),
+          Container(
+            width: double.infinity,
+            height: 500.0,
+            padding: EdgeInsets.all(20.0),
+            child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: MineSweeperGame.row,
+                  crossAxisSpacing: 6.0,
+                  mainAxisSpacing: 6.0,
+                ),
+                itemCount: MineSweeperGame.cells,
+                itemBuilder: (BuildContext ctx, index) {
+                  return Container(
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Center(child: Text(game.gameMap[index].content)),
+                  );
+                }),
+          ),
+          RawMaterialButton(
+            onPressed: () {
+              print(game.gameMap);
+            },
+            child: Text("Debug"),
+          ),
         ],
       ),
     );
