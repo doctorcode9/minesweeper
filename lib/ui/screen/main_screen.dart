@@ -134,9 +134,12 @@ class _MainScreenState extends State<MainScreen> {
           ),
           RawMaterialButton(
             onPressed: () {
-              print(game.gameMap);
+              setState(() {
+                game.generateMap();
+              });
             },
-            child: Text("Debug"),
+            fillColor: Colors.blue,
+            child: Text("repeat"),
           ),
         ],
       ),

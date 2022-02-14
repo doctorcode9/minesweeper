@@ -62,6 +62,18 @@ class MineSweeperGame {
       }
       cell.content = mineCount;
       cell.reveal = true;
+      if (mineCount == 0) {
+        //reveal all adjacent cell
+        for (int i = max(cellRow - 1, 0); i <= min(cellRow + 1, row - 1); i++) {
+          for (int j = max(cellCol - 1, 0);
+              j <= min(cellCol + 1, col - 1);
+              j++) {
+            if (map[i][j].content == "") {
+              getClickedCell(map[i][j]);
+            }
+          }
+        }
+      }
     }
   }
 }
