@@ -117,14 +117,15 @@ class _MainScreenState extends State<MainScreen> {
                     onTap: () {
                       setState(() {
                         game.getClickedCell(game.gameMap[index]);
-                        print(game.gameMap[index].content);
+                        print(
+                            "Cell [${game.gameMap[index].row}][${game.gameMap[index].col}]");
                       });
                     },
                     child: Container(
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: Text(game.gameMap[index].reveal
-                            ? game.gameMap[index].content
+                            ? "${game.gameMap[index].content}"
                             : ""),
                       ),
                     ),

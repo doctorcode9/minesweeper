@@ -5,7 +5,7 @@ class MineSweeperGame {
   static int row = 6;
   static int col = 6;
   static int cells = row * col;
-  static bool gameOver = false;
+  bool gameOver = false;
   List<Cell> gameMap = [];
   //static List<Cell> map = List.generate(row * col, (index) => Cell(index % row, index ~/ col, "", false));
   static List<List<dynamic>> map = List.generate(
@@ -25,14 +25,14 @@ class MineSweeperGame {
   static void placeMines(int mineNumber) {
     Random random = Random();
     for (int i = 0; i < mineNumber; i++) {
-      int x = random.nextInt(row);
-      int y = random.nextInt(col);
-      map[x][y] = Cell(x, y, "X", false);
+      int mineRow = random.nextInt(row);
+      int mineCol = random.nextInt(col);
+      map[mineRow][mineCol] = Cell(mineRow, mineCol, "X", false);
     }
   }
 
   // Function to show all the mine in case of game over
-  static void showMines() {
+  void showMines() {
     for (int i = 0; i < row; i++) {
       for (int j = 0; j < col; j++) {
         map[i][j].reveal = map[i][j].content == "X";
@@ -52,14 +52,16 @@ class MineSweeperGame {
       int mineCount = 0;
       int cellRow = cell.row;
       int cellCol = cell.col;
-
-      for (int i = max(cellRow - 1, 0); i < min(cellRow + 1, row - 1); i++) {
-        for (int j = max(cellCol - 1, 0); j < min(cellCol + 1, col - 1); j++) {
+      print("test: ${cell.col}");
+      for (int i = max(cellRow - 1, 0); i <= min(cellRow + 1, row - 1); i++) {
+        for (int j = max(cellCol - 1, 0); j <= min(cellCol + 1, col - 1); j++) {
           if (map[i][j].content == "X") {
             mineCount++;
           }
         }
       }
+      cell.content = mineCount;
+      cell.reveal = true;
     }
   }
 }
